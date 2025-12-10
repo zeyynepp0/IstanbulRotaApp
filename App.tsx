@@ -72,7 +72,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsScreen from './src/screens/ResultsScreen';
-// import DetailScreen from './src/screens/DetailScreen'; // Henüz oluşturmadık
+import DetailScreen from './src/screens/DetailScreen'; 
 
 import { RootStackParamList } from './src/types/navigation';
 
@@ -90,7 +90,7 @@ export default function App() {
         >
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Results" component={ResultsScreen} />
-          {/* <Stack.Screen name="Detail" component={DetailScreen} /> */}
+           <Stack.Screen name="Detail" component={DetailScreen} /> 
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
