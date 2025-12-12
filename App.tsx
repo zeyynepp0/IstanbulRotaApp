@@ -37,7 +37,7 @@ import useTrafficInfo from './src/hooks/useTrafficInfo'; */
   const { data, loading } = useTrafficInfo();
 
   return ( */
-  /*   <View style={styles.container}>
+/*   <View style={styles.container}>
       <View>{loading ? <ActivityIndicator /> : JSON.stringify(data)}</View>
     </View> */
 /*      <View
@@ -72,9 +72,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsScreen from './src/screens/ResultsScreen';
-import DetailScreen from './src/screens/DetailScreen'; 
+import DetailScreen from './src/screens/DetailScreen';
 
 import { RootStackParamList } from './src/types/navigation';
+import { Text, View } from 'react-native';
+
+// import './src/i18n/i18n';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -82,15 +85,14 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator 
-          screenOptions={{ 
+        <Stack.Navigator
+          screenOptions={{
             headerShown: false,
-            cardStyle: { backgroundColor: '#F9FAFB' }
           }}
         >
           <Stack.Screen name="Search" component={SearchScreen} />
           <Stack.Screen name="Results" component={ResultsScreen} />
-           <Stack.Screen name="Detail" component={DetailScreen} /> 
+          <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

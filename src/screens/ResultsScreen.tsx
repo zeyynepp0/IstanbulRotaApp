@@ -13,6 +13,7 @@ import { formatTime } from '../utils/formatters';
 import { ResultsScreenNavigationProp, ResultsScreenRouteProp } from '../types/navigation';
 import { ICONS } from '../constants/icons';
 
+
 interface ResultsScreenProps {
   navigation: ResultsScreenNavigationProp;
   route: ResultsScreenRouteProp;
@@ -29,7 +30,7 @@ export default function ResultsScreen({ route, navigation }: ResultsScreenProps)
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center bg-background">
-        <ActivityIndicator size="large" color="#2563EB" />
+        <ActivityIndicator size="large" color="bg-primary" />
         <Text className="mt-4 text-base text-text-sub">Rotalar hesaplanıyor...</Text>
       </View>
     );

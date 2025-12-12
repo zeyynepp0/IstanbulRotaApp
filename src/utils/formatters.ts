@@ -1,4 +1,5 @@
-// src/utils/formatters.ts
+import { ICONS } from "../constants/icons";
+
 export const formatTime = (minutes: number): string => {
   if (minutes < 60) {
     return `${Math.round(minutes)} dk`;
@@ -17,9 +18,9 @@ export const formatDistance = (meters: number): string => {
 
 export const getRouteIcon = (type: 'car' | 'transit' | 'park-ride'): string => {
   switch (type) {
-    case 'car': return '🚗';
-    case 'transit': return '🚇';
-    case 'park-ride': return '🅿️';
+    case 'car': return 'ICONS.car';
+    case 'transit': return 'ICONS.transit';
+    case 'park-ride': return 'ICONS.park';
   }
 };
 

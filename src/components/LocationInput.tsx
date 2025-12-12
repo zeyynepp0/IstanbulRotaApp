@@ -34,7 +34,7 @@ export default function LocationInput({
       } else {
         setShowResults(false);
       }
-    }, 1000); 
+    }, 500); 
 
     return () => clearTimeout(timer);
   }, [query]);
@@ -64,8 +64,9 @@ export default function LocationInput({
         <TextInput
           className="flex-1 text-base text-text-main p-0"
           placeholder={placeholder}
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor="text-light"
           value={query}
+          // onSubmitEditing={}
           onChangeText={setQuery}
           onFocus={() => {
             if (query.trim().length >= 2 && results.length > 0) {
@@ -75,7 +76,7 @@ export default function LocationInput({
           autoCapitalize="none"
           autoCorrect={false}
         />
-        {loading && <ActivityIndicator size="small" color="#2563EB" />}
+        {loading && <ActivityIndicator size="small" color="bg-primary.DEFAULT" />}
         {query.length > 0 && !loading && (
           <TouchableOpacity onPress={handleClear} className="w-6 h-6 justify-center items-center ml-2">
             <Text className="text-2xl text-text-light font-light">{ICONS.clear}</Text>
