@@ -108,6 +108,7 @@ export default function LocationInput({
           <FlatList
             data={results}
             keyExtractor={(item, index) => `${item.lat}-${item.lon}-${index}`}
+            nestedScrollEnabled={true}
             renderItem={({ item }) => (
               <TouchableOpacity
                 className="flex-row p-4 border-b border-gray-100 items-center active:bg-gray-50"
