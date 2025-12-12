@@ -52,6 +52,7 @@ export default function SearchScreen({ navigation }: SearchScreenProps) {
             placeholder={t('search.destination')}
             icon={ICONS.start}
             onLocationSelect={setOrigin}
+            value={origin}
           />
 
           {/* Swap Button */}
@@ -69,6 +70,7 @@ export default function SearchScreen({ navigation }: SearchScreenProps) {
             placeholder={t('search.destination')}
             icon={ICONS.destination}
             onLocationSelect={setDestination}
+            value={destination}
           />
         </View>
 

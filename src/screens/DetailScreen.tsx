@@ -131,7 +131,7 @@ const DetailScreen: React.FC = () => {
           {pr.parking && (
             <>
               <Text className="text-sm text-text-sub mb-1">
-                {ICONS.park} Otopark:{' '}
+                {ICONS.park} {t('detail.parkRideSummary.parking')}:{' '}
                 <Text className="font-bold text-primary">
                   {pr.parking.name || t('detail.parkRideSummary.unknown')}
                 </Text>
