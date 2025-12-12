@@ -1,4 +1,3 @@
-// src/components/LocationInput.tsx
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -6,11 +5,11 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  StyleSheet,
   ActivityIndicator,
 } from 'react-native';
 import { useGeocoding } from '../hooks/useGeocoding';
 import { Location, GeocodeResult } from '../types/api';
+import { ICONS } from '../constants/icons';
 
 interface LocationInputProps {
   placeholder?: string;
@@ -20,7 +19,7 @@ interface LocationInputProps {
 
 export default function LocationInput({
   placeholder = "Konum ara...",
-  icon = "📍",
+  icon = ICONS.pin,
   onLocationSelect,
 }: LocationInputProps) {
   const [query, setQuery] = useState('');
@@ -35,7 +34,7 @@ export default function LocationInput({
       } else {
         setShowResults(false);
       }
-    }, 1000); // Debounce: 300ms bekle
+    }, 1000); 
 
     return () => clearTimeout(timer);
   }, [query]);
@@ -59,11 +58,11 @@ export default function LocationInput({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <Text style={styles.icon}>{icon}</Text>
+    <View className="mb-4 z-50">
+      <View className="flex-row items-center bg-white rounded-xl px-4 py-3.5 border border-gray-200 shadow-sm shadow-black/5 elevation-2">
+        <Text className="text-xl mr-3">{icon}</Text>
         <TextInput
-          style={styles.input}
+          className="flex-1 text-base text-text-main p-0"
           placeholder={placeholder}
           placeholderTextColor="#9CA3AF"
           value={query}
@@ -78,155 +77,48 @@ export default function LocationInput({
         />
         {loading && <ActivityIndicator size="small" color="#2563EB" />}
         {query.length > 0 && !loading && (
-          <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
-            <Text style={styles.clearIcon}>×</Text>
+          <TouchableOpacity onPress={handleClear} className="w-6 h-6 justify-center items-center ml-2">
+            <Text className="text-2xl text-text-light font-light">{ICONS.clear}</Text>
           </TouchableOpacity>
         )}
       </View>
 
       {showResults && results.length > 0 && (
-        <View style={styles.resultsContainer}>
+        <View className="bg-white rounded-xl mt-2 max-h-64 border border-gray-200 shadow-lg shadow-black/10 elevation-4 overflow-hidden">
           <FlatList
             data={results}
             keyExtractor={(item, index) => `${item.lat}-${item.lon}-${index}`}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={styles.resultItem}
+                className="flex-row p-4 border-b border-gray-100 items-center active:bg-gray-50"
                 onPress={() => handleSelect(item)}
                 activeOpacity={0.7}
               >
-                <View style={styles.resultIconContainer}>
-                  <Text style={styles.resultIcon}>📍</Text>
+                <View className="w-8 h-8 rounded-full bg-blue-50 justify-center items-center mr-3">
+                  <Text className="text-base">{ICONS.pin}</Text>
                 </View>
-                <View style={styles.resultContent}>
-                  <Text style={styles.resultName} numberOfLines={1}>
+                <View className="flex-1">
+                  <Text className="text-base font-semibold text-text-main mb-0.5" numberOfLines={1}>
                     {item.name}
                   </Text>
                   {item.address && (
-                    <Text style={styles.resultAddress} numberOfLines={1}>
+                    <Text className="text-[13px] text-text-sub" numberOfLines={1}>
                       {item.address}
                     </Text>
                   )}
                 </View>
               </TouchableOpacity>
             )}
-            style={styles.resultsList}
             keyboardShouldPersistTaps="handled"
           />
         </View>
       )}
 
       {showResults && !loading && results.length === 0 && query.length >= 2 && (
-        <View style={styles.noResultsContainer}>
-          <Text style={styles.noResultsText}>Sonuç bulunamadı</Text>
+        <View className="bg-white rounded-xl mt-2 p-5 border border-gray-200 items-center">
+          <Text className="text-sm text-text-light">Sonuç bulunamadı</Text>
         </View>
       )}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 16,
-    zIndex: 1000,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  icon: {
-    fontSize: 20,
-    marginRight: 12,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: '#1F2937',
-    padding: 0,
-  },
-  clearButton: {
-    width: 24,
-    height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
-  },
-  clearIcon: {
-    fontSize: 24,
-    color: '#9CA3AF',
-    fontWeight: '300',
-  },
-  resultsContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginTop: 8,
-    maxHeight: 250,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-    overflow: 'hidden',
-  },
-  resultsList: {
-    flexGrow: 0,
-  },
-  resultItem: {
-    flexDirection: 'row',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
-    alignItems: 'center',
-  },
-  resultIconContainer: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#EFF6FF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  resultIcon: {
-    fontSize: 16,
-  },
-  resultContent: {
-    flex: 1,
-  },
-  resultName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#1F2937',
-    marginBottom: 2,
-  },
-  resultAddress: {
-    fontSize: 13,
-    color: '#6B7280',
-  },
-  noResultsContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginTop: 8,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    alignItems: 'center',
-  },
-  noResultsText: {
-    fontSize: 14,
-    color: '#9CA3AF',
-  },
-});

@@ -1,7 +1,7 @@
-// src/components/RouteCard.tsx
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { formatTime } from '../utils/formatters';
+import { ICONS } from '../constants/icons';
 
 interface RouteCardProps {
   type: 'car' | 'transit' | 'park-ride';
@@ -26,183 +26,88 @@ export default function RouteCard({
   isFastest,
   onPress
 }: RouteCardProps) {
+  
   const getIcon = () => {
     switch (type) {
-      case 'car': return '🚗';
-      case 'transit': return '🚇';
-      case 'park-ride': return '🅿️';
+      case 'car': return ICONS.car;
+      case 'transit': return ICONS.transit;
+      case 'park-ride': return ICONS.park;
     }
   };
 
-  const getColor = () => {
+  // Renk sınıflarını dinamik belirle
+  const getIconBgClass = () => {
     switch (type) {
-      case 'car': return '#3B82F6';
-      case 'transit': return '#10B981';
-      case 'park-ride': return '#8B5CF6';
+      case 'car': return 'bg-blue-500/10';
+      case 'transit': return 'bg-emerald-500/10';
+      case 'park-ride': return 'bg-violet-500/10';
+    }
+  };
+  
+  const getDetailsColorClass = () => {
+    switch (type) {
+      case 'car': return 'text-blue-600';
+      case 'transit': return 'text-emerald-600';
+      case 'park-ride': return 'text-violet-600';
     }
   };
 
   return (
     <TouchableOpacity 
-      style={[
-        styles.card,
-        isFastest && styles.cardFastest
-      ]}
+      className={`mx-4 mb-3 bg-background-card rounded-2xl p-4 shadow-sm elevation-3 ${isFastest ? 'border-2 border-emerald-500' : ''}`}
       onPress={onPress}
       activeOpacity={0.7}
     >
       {isFastest && (
-        <View style={styles.badge}>
-          <Text style={styles.badgeText}>⚡ EN HIZLI</Text>
+        <View className="absolute -top-2 right-4 bg-emerald-500 px-3 py-1 rounded-xl z-10">
+          <Text className="text-white text-[10px] font-bold">⚡ EN HIZLI</Text>
         </View>
       )}
 
-      <View style={styles.cardHeader}>
-        <View style={[styles.iconContainer, { backgroundColor: getColor() + '20' }]}>
-          <Text style={styles.icon}>{getIcon()}</Text>
+      <View className="flex-row items-center mb-3">
+        <View className={`w-12 h-12 rounded-full justify-center items-center mr-3 ${getIconBgClass()}`}>
+          <Text className="text-2xl">{getIcon()}</Text>
         </View>
         
-        <View style={styles.headerContent}>
-          <Text style={styles.title}>{title}</Text>
-          {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+        <View className="flex-1">
+          <Text className="text-lg font-semibold text-text-main">{title}</Text>
+          {subtitle && <Text className="text-sm text-text-sub mt-0.5">{subtitle}</Text>}
         </View>
 
-        <View style={styles.timeContainer}>
-          <Text style={styles.time}>{formatTime(time)}</Text>
-          <Text style={styles.timeLabel}>süre</Text>
+        <View className="items-end">
+          <Text className="text-xl font-bold text-text-main">{formatTime(time)}</Text>
+          <Text className="text-xs text-text-light">süre</Text>
         </View>
       </View>
 
       {details && (
-        <View style={styles.detailsRow}>
+        <View className="flex-row py-3 border-t border-b border-gray-100 mb-3">
           {details.car && (
-            <View style={styles.detailItem}>
-              <Text style={styles.detailIcon}>🚗</Text>
-              <Text style={styles.detailText}>{details.car}</Text>
+            <View className="flex-row items-center mr-4">
+              <Text className="text-base mr-1">{ICONS.car}</Text>
+              <Text className="text-sm text-text-sub">{details.car}</Text>
             </View>
           )}
           {details.walk && (
-            <View style={styles.detailItem}>
-              <Text style={styles.detailIcon}>🚶</Text>
-              <Text style={styles.detailText}>{details.walk}</Text>
+            <View className="flex-row items-center mr-4">
+              <Text className="text-base mr-1">{ICONS.walk}</Text>
+              <Text className="text-sm text-text-sub">{details.walk}</Text>
             </View>
           )}
           {details.transit && (
-            <View style={styles.detailItem}>
-              <Text style={styles.detailIcon}>🚇</Text>
-              <Text style={styles.detailText}>{details.transit}</Text>
+            <View className="flex-row items-center">
+              <Text className="text-base mr-1">{ICONS.transit}</Text>
+              <Text className="text-sm text-text-sub">{details.transit}</Text>
             </View>
           )}
         </View>
       )}
 
-      <View style={styles.footer}>
-        <Text style={[styles.viewDetails, { color: getColor() }]}>
+      <View className="items-end">
+        <Text className={`text-sm font-semibold ${getDetailsColorClass()}`}>
           Detayları Gör →
         </Text>
       </View>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    marginHorizontal: 16,
-    marginBottom: 12,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  cardFastest: {
-    borderWidth: 2,
-    borderColor: '#10B981',
-  },
-  badge: {
-    position: 'absolute',
-    top: -8,
-    right: 16,
-    backgroundColor: '#10B981',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  badgeText: {
-    color: '#FFFFFF',
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  iconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  icon: {
-    fontSize: 24,
-  },
-  headerContent: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#1F2937',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginTop: 2,
-  },
-  timeContainer: {
-    alignItems: 'flex-end',
-  },
-  time: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#1F2937',
-  },
-  timeLabel: {
-    fontSize: 12,
-    color: '#9CA3AF',
-  },
-  detailsRow: {
-    flexDirection: 'row',
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#F3F4F6',
-    marginBottom: 12,
-  },
-  detailItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  detailIcon: {
-    fontSize: 16,
-    marginRight: 4,
-  },
-  detailText: {
-    fontSize: 14,
-    color: '#6B7280',
-  },
-  footer: {
-    alignItems: 'flex-end',
-  },
-  viewDetails: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
