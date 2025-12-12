@@ -1,71 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-/* import { NewAppScreen } from '@react-native/new-app-screen';
-import { useEffect } from 'react';
-import {
-  ActivityIndicator,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-import useTrafficInfo from './src/hooks/useTrafficInfo'; */
-
-/* function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-} */
-
-/* function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-  const { data, loading } = useTrafficInfo();
-
-  return ( */
-/*   <View style={styles.container}>
-      <View>{loading ? <ActivityIndicator /> : JSON.stringify(data)}</View>
-    </View> */
-/*      <View
-      style={[
-        styles.container,
-        { paddingTop: safeAreaInsets.top, paddingBottom: safeAreaInsets.bottom },
-      ]}
-    >
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <Text selectable>
-          {JSON.stringify(data, null, 2)}
-        </Text>
-      )}
-    </View>
-  );
-} */
-
-/* const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-});
-
-export default App; */
-// App.tsx
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -73,15 +5,15 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsScreen from './src/screens/ResultsScreen';
 import DetailScreen from './src/screens/DetailScreen';
-
 import { RootStackParamList } from './src/types/navigation';
 import { Text, View } from 'react-native';
-
-// import './src/i18n/i18n';
+import './src/i18n/i18n';
+import LanguageToggle from './src/components/LanguageToggle';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
+  //return <Text>Test</Text>;
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -95,6 +27,9 @@ export default function App() {
           <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <View className="absolute top-0 right-0 ">
+        <LanguageToggle dark={false} />
+      </View>
     </SafeAreaProvider>
   );
 }

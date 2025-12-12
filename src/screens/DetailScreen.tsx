@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../types/navigation';
 import { ICONS } from '../constants/icons';
+import { useTranslation } from 'react-i18next';
 
 type DetailRouteProp = RouteProp<RootStackParamList, 'Detail'>;
 
@@ -22,21 +23,29 @@ const fmtMin = (val: any) => {
 const DetailScreen: React.FC = () => {
   const route = useRoute<DetailRouteProp>();
   const { type, data } = route.params;
+  const { t } = useTranslation();
 
   const renderTitle = () => {
-    switch (type) {
-      case 'car': return 'Araç Rota Detayı';
-      case 'transit': return 'Toplu Taşıma Detayı';
-      case 'park-ride': return 'Park & Ride Detayı';
-      default: return 'Rota Detayı';
+   switch (type) {
+      case 'car': 
+        return t('detail.titles.car'); 
+        
+      case 'transit': 
+        return t('detail.titles.transit');
+        
+      case 'park-ride': 
+        return t('detail.titles.parkRide');
+        
+      default: 
+        return t('detail.titles.default');
     }
   };
 
   const renderSubtitle = () => {
     switch (type) {
-      case 'car': return 'Sadece araç kullanarak gitme süresi';
-      case 'transit': return 'Toplu taşıma adımları, aktarmalar ve süreler';
-      case 'park-ride': return 'Otoparka kadar araç, sonra toplu taşıma ve yürüyüş';
+      case 'car': return t('detail.subtitles.car');
+      case 'transit': return t('detail.subtitles.transit');
+      case 'park-ride': return t('detail.subtitles.parkRide');
       default: return '';
     }
   };
@@ -46,37 +55,37 @@ const DetailScreen: React.FC = () => {
 
     return (
       <View className="bg-background-card p-4 rounded-2xl mt-4 shadow-sm shadow-black/5 elevation-2">
-        <Text className="text-lg font-semibold text-text-main mb-2">Toplu Taşıma Özeti</Text>
+        <Text className="text-lg font-semibold text-text-main mb-2">{t('detail.transitSummary.title')}</Text>
 
         <Text className="text-sm text-text-sub mb-1">
-          {ICONS.time} Toplam süre:{' '}
+          {ICONS.time} {t('detail.transitSummary.totalTime')}: {' '}
           <Text className="font-bold text-primary">{fmtMin(transit.total_min)} dk</Text>
         </Text>
 
         <Text className="text-sm text-text-sub mb-1">
-          {ICONS.walk} Başlangıç yürüyüşü: {fmtMin(transit.walk_to_station_min)} dk
+          {ICONS.walk} {t('detail.transitSummary.walkStart')}: {fmtMin(transit.walk_to_station_min)} dk
         </Text>
 
         <Text className="text-sm text-text-sub mb-1">
-          {ICONS.train} Araç içi süre: {fmtMin(transit.in_vehicle_min)} dk
+          {ICONS.train} {t('detail.transitSummary.inVehicle')}: {fmtMin(transit.in_vehicle_min)} dk
         </Text>
 
         <Text className="text-sm text-text-sub mb-1">
-          {ICONS.walkFemale} Çıkış yürüyüşü: {fmtMin(transit.walk_from_station_min)} dk
+          {ICONS.walkFemale} {t('detail.transitSummary.walkEnd')}: {fmtMin(transit.walk_from_station_min)} dk
         </Text>
 
         {Array.isArray(transit.segments) && transit.segments.length > 0 && (
           <View className="mt-3">
-            <Text className="text-[15px] font-semibold text-text-main mb-1.5">Hat Detayları</Text>
+            <Text className="text-[15px] font-semibold text-text-main mb-1.5">{t('detail.transitSummary.lineDetails')}</Text>
             {transit.segments.map((seg: any, idx: number) => {
-              const isTransfer = seg.is_transfer || seg.line === 'TRANSFER';
+              const isTransfer = seg.is_transfer || seg.line === t('detail.transitSummary.transferLabel');
               const fromName = seg.from_name || seg.from || '-';
               const toName = seg.to_name || seg.to || '-';
 
               return (
                 <View key={idx} className="py-1.5 border-b border-gray-200">
                   <Text className="text-[13px] font-semibold text-primary">
-                    {isTransfer ? 'Aktarma (yürüyüş)' : seg.line}
+                    {isTransfer ? t('detail.transitSummary.transfer') : seg.line}
                   </Text>
                   <Text className="text-[13px] text-text-sub">
                     {fromName} → {toName}
@@ -103,24 +112,24 @@ const DetailScreen: React.FC = () => {
     return (
       <>
         <View className="bg-background-card p-4 rounded-2xl mt-4 shadow-sm shadow-black/5 elevation-2">
-          <Text className="text-lg font-semibold text-text-main mb-2">Park & Ride Özeti</Text>
+          <Text className="text-lg font-semibold text-text-main mb-2">{t('detail.parkRideSummary.title')}</Text>
 
           {pr.parking && (
             <>
               <Text className="text-sm text-text-sub mb-1">
                 {ICONS.park} Otopark:{' '}
-                <Text className="font-bold text-primary">{pr.parking.name || 'Bilinmiyor'}</Text>
+                <Text className="font-bold text-primary">{pr.parking.name || t('detail.parkRideSummary.unknown')}</Text>
               </Text>
               {pr.parking.ilce && (
                 <Text className="text-sm text-text-sub mb-1">
-                  {ICONS.pin} İlçe: {pr.parking.ilce}
+                  {ICONS.pin} {t('detail.parkRideSummary.district')}: {pr.parking.ilce}
                 </Text>
               )}
             </>
           )}
 
           <Text className="text-sm text-text-sub mb-1">
-            {ICONS.car} Otoparka araçla: {fmtMin(pr.car_min)} dk
+            {ICONS.car} {t('detail.parkRideSummary.carToParking')}: {fmtMin(pr.car_min)} dk
           </Text>
 
           <Text className="text-sm text-text-sub mb-1">
@@ -130,17 +139,17 @@ const DetailScreen: React.FC = () => {
 
           {transit && (
             <Text className="text-sm text-text-sub mb-1">
-              {ICONS.transit} Toplu taşıma: {fmtMin(transit.total_min)} dk
+              {ICONS.transit} {t('detail.parkRideSummary.transit')}: {fmtMin(transit.total_min)} dk
             </Text>
           )}
 
           <Text className="text-sm text-text-sub mt-2">
-            {ICONS.time} Toplam süre:{' '}
+            {ICONS.time} {t('detail.parkRideSummary.totalTime')}: {' '}
             <Text className="font-bold text-primary">{fmtMin(pr.total_min)} dk</Text>
           </Text>
 
           <Text className="mt-2 text-xs text-text-light">
-            Park & Ride seçeneği, yoğun trafik bölgelerine girmeden toplu taşımaya geçmenizi sağlar.
+            t()t('detail.parkRideSummary.note')
           </Text>
         </View>
 
@@ -154,15 +163,15 @@ const DetailScreen: React.FC = () => {
 
     return (
       <View className="bg-background-card p-4 rounded-2xl mt-4 shadow-sm shadow-black/5 elevation-2">
-        <Text className="text-lg font-semibold text-text-main mb-2">Araç ile Yolculuk</Text>
+        <Text className="text-lg font-semibold text-text-main mb-2">{t('detail.carSummary.title')}</Text>
         <Text className="text-sm text-text-sub mb-1">
-          {ICONS.car} Tahmini süre:{' '}
+          {ICONS.car} {t('detail.carSummary.estimatedTime')}: {' '}
           <Text className="font-bold text-primary">
             {fmtMin(data.car_only_min ?? data.total_min)} dk
           </Text>
         </Text>
         <Text className="mt-2 text-xs text-text-light">
-          Süreler TomTom veya tahmini hızlara göre hesaplanmıştır.
+          {t('detail.carSummary.note')}
         </Text>
       </View>
     );
@@ -172,8 +181,8 @@ const DetailScreen: React.FC = () => {
     if (!data) {
       return (
         <View className="bg-background-card p-4 rounded-2xl mt-4 shadow-sm shadow-black/5 elevation-2">
-          <Text className="text-lg font-semibold text-text-main mb-2">Veri bulunamadı</Text>
-          <Text className="text-sm text-text-sub">Bu rota için detay bilgisi alınamadı.</Text>
+          <Text className="text-lg font-semibold text-text-main mb-2">{t('detail.errors.noDataTitle')}</Text>
+          <Text className="text-sm text-text-sub">{t('detail.errors.noDataText')}</Text>
         </View>
       );
     }

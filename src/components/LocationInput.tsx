@@ -10,6 +10,7 @@ import {
 import { useGeocoding } from '../hooks/useGeocoding';
 import { Location, GeocodeResult } from '../types/api';
 import { ICONS } from '../constants/icons';
+import { useTranslation } from 'react-i18next';
 
 interface LocationInputProps {
   placeholder?: string;
@@ -25,7 +26,7 @@ export default function LocationInput({
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
   const { search, results, loading } = useGeocoding();
-
+ const { t } = useTranslation();
   useEffect(() => {
     const timer = setTimeout(() => {
       if (query.trim().length >= 2) {
@@ -117,7 +118,7 @@ export default function LocationInput({
 
       {showResults && !loading && results.length === 0 && query.length >= 2 && (
         <View className="bg-white rounded-xl mt-2 p-5 border border-gray-200 items-center">
-          <Text className="text-sm text-text-light">Sonuç bulunamadı</Text>
+          <Text className="text-sm text-text-light">{t('components.noResults')}</Text>
         </View>
       )}
     </View>

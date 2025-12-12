@@ -1,0 +1,80 @@
+{
+  "search": {
+    "title": "Istanbul Route Planner",
+    "subtitle": "Find the fastest route",
+    "origin": "Where are you starting?",
+    "destination": "Where are you going?",
+    "showRoutes": "Show Routes",
+    "tips": "Tips",
+    "alertTitle": "Missing Info",
+    "alertMessage": "Please select origin and destination.",
+    "compareOptions": "Compare car, public transit, and Park&Ride options",
+    "realTimeTraffic": "Find the fastest route with real-time traffic information",
+    "parkRideSavings": "Save both time and money with Park&Ride"
+  },
+  "results": {
+    "calculating": "Calculating routes...",
+    "errorTitle": "An error occurred",
+    "retry": "Try Again",
+    "trafficWarningTitle": "Traffic Warning",
+    "trafficWarningText": "Heavy traffic after {{distance}} km",
+    "routeOptions": "Route Options",
+    "carOnly": "Car Only",
+    "transitOnly": "Public Transit",
+    "transitSubtitle": "{{count}} transfer(s)",
+    "parkAndRide": "Park & Ride",
+    "fastestBadge": "FASTEST",
+    "transfers": "transfer(s)"
+  },
+  "detail": {
+    "titles": {
+      "car": "Car Route Details",
+      "transit": "Public Transit Details",
+      "parkRide": "Park & Ride Details",
+      "default": "Route Details"
+    },
+    "subtitles": {
+      "car": "Travel time using only car",
+      "transit": "Transit steps, transfers and durations",
+      "parkRide": "Car to parking, then transit and walking"
+    },
+    "transitSummary": {
+      "title": "Transit Summary",
+      "totalTime": "Total time",
+      "walkStart": "Initial walk",
+      "inVehicle": "Time in vehicle",
+      "walkEnd": "Final walk",
+      "lineDetails": "Line Details",
+      "transfer": "Transfer (walk)",
+      "transferLabel": "TRANSFER"
+    },
+    "parkRideSummary": {
+      "title": "Park & Ride Summary",
+      "parking": "Parking",
+      "district": "District",
+      "carToParking": "Car to parking",
+      "walkToStation": "Parking → station walk",
+      "transit": "Public transit",
+      "note": "Park & Ride option allows you to switch to public transit without entering heavy traffic zones.",
+       "unknown": "Unknown",
+      "totalTime": "Total time"
+    },
+    "carSummary": {
+      "title": "Travel by Car",
+      "estimatedTime": "Estimated time",
+      "note": "Times are calculated based on TomTom or estimated speeds."
+    },
+    "errors": {
+      "noDataTitle": "No Data Found",
+      "noDataText": "Detailed info could not be retrieved for this route.",
+      "unknownType": "No custom view defined for this route type."
+    }
+  },
+  "components": {
+    "duration": "duration",
+    "viewDetails": "View Details →",
+    "noResults": "No results found",
+    "unknown": "Unknown",
+    "fastestBadge": "FASTEST"
+  }
+}

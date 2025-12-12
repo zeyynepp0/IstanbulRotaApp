@@ -22,12 +22,12 @@ export const useRoutePlanning = () => {
           'Accept': 'application/json',
         },
        body: JSON.stringify({
-        /* // 🔴 ŞİMDİLİK SABİT KOORDİNAT
+        /* //  ŞİMDİLİK SABİT KOORDİNAT
         origin_lat: 41.013840019867075,
         origin_lon: 28.954051946983668,
         dest_lat: 41.01623559083171,
         dest_lon: 28.972707920503694, */
-        // 🔵 ARTIK KULLANICININ SEÇTİĞİ KOORDİNATLAR GÖNDERİLİYOR
+        //  ARTIK KULLANICININ SEÇTİĞİ KOORDİNATLAR GÖNDERİLİYOR
           origin_lat: origin.lat,
           origin_lon: origin.lon,
           dest_lat: destination.lat,

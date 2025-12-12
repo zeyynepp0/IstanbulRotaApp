@@ -1,0 +1,80 @@
+{
+  "search": {
+    "title": "İstanbul Rota Planlayıcı",
+    "subtitle": "En hızlı rotayı bulun",
+    "origin": "Nereden başlıyorsunuz?",
+    "destination": "Nereye gidiyorsunuz?",
+    "showRoutes": "Rotaları Göster",
+    "tips": "İpuçları",
+    "alertTitle": "Eksik Bilgi",
+    "alertMessage": "Lütfen başlangıç ve varış noktalarını seçin.",
+    "compareOptions": "Araç, toplu taşıma ve Park&Ride seçeneklerini karşılaştırın",
+    "realTimeTraffic": "Gerçek zamanlı trafik bilgisi ile en hızlı rotayı bulun",
+    "parkRideSavings": "Park&Ride ile hem zaman hem para tasarrufu yapın"
+  },
+  "results": {
+    "calculating": "Rotalar hesaplanıyor...",
+    "errorTitle": "Bir hata oluştu",
+    "retry": "Tekrar Dene",
+    "trafficWarningTitle": "Trafik Uyarısı",
+    "trafficWarningText": "{{distance}} km sonra yoğun trafik",
+    "routeOptions": "Rota Seçenekleri",
+    "carOnly": "Sadece Araç",
+    "transitOnly": "Toplu Taşıma",
+    "transitSubtitle": "{{count}} aktarma",
+    "parkAndRide": "Park & Ride",
+    "fastestBadge": "EN HIZLI",
+    "transfers": "aktarma"
+  },
+  "detail": {
+    "titles": {
+      "car": "Araç Rota Detayı",
+      "transit": "Toplu Taşıma Detayı",
+      "parkRide": "Park & Ride Detayı",
+      "default": "Rota Detayı"
+    },
+    "subtitles": {
+      "car": "Sadece araç kullanarak gitme süresi",
+      "transit": "Toplu taşıma adımları, aktarmalar ve süreler",
+      "parkRide": "Otoparka kadar araç, sonra toplu taşıma ve yürüyüş"
+    },
+    "transitSummary": {
+      "title": "Toplu Taşıma Özeti",
+      "totalTime": "Toplam süre",
+      "walkStart": "Başlangıç yürüyüşü",
+      "inVehicle": "Araç içi süre",
+      "walkEnd": "Çıkış yürüyüşü",
+      "lineDetails": "Hat Detayları",
+      "transfer": "Aktarma (yürüyüş)",
+      "transferLabel": "TRANSFER"
+    },
+    "parkRideSummary": {
+      "title": "Park & Ride Özeti",
+      "parking": "Otopark",
+      "district": "İlçe",
+      "carToParking": "Otoparka araçla",
+      "walkToStation": "Otopark → istasyon yürüyüş",
+      "transit": "Toplu taşıma",
+      "note": "Park & Ride seçeneği, yoğun trafik bölgelerine girmeden toplu taşımaya geçmenizi sağlar.",
+      "unknown": "Bilinmiyor",
+      "totalTime": "Toplam süre"
+    },
+    "carSummary": {
+      "title": "Araç ile Yolculuk",
+      "estimatedTime": "Tahmini süre",
+      "note": "Süreler TomTom veya tahmini hızlara göre hesaplanmıştır."
+    },
+    "errors": {
+      "noDataTitle": "Veri bulunamadı",
+      "noDataText": "Bu rota için detay bilgisi alınamadı.",
+      "unknownType": "Bu rota tipi için özel bir görünüm tanımlanmadı."
+    }
+  },
+  "components": {
+    "duration": "süre",
+    "viewDetails": "Detayları Gör →",
+    "noResults": "Sonuç bulunamadı",
+    "unknown": "Bilinmiyor",
+   "fastestBadge": "EN HIZLI"
+  }
+}
