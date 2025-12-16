@@ -35,7 +35,7 @@ const useTrafficInfo = () => {
 export default useTrafficInfo;
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export interface TrafficPlanResponse {
   [key: string]: any;
@@ -53,10 +53,11 @@ const useTrafficInfo = () => {
       try {
         setLoading(true);
 
-        const res = await fetch("http://10.81.1.76:8000/plan", {
-          method: "POST",
+        //const res = await fetch("http://10.81.1.76:8000/plan", {
+        const res = await fetch('http://192.168.101.100:8000/plan', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             origin_lat: 41.013840019867175,
@@ -67,22 +68,22 @@ const useTrafficInfo = () => {
         });
 
         const text = await res.text();
-        console.log("API STATUS:", res.status);
-        console.log("API RAW RESPONSE:", text);
+        console.log('API STATUS:', res.status);
+        console.log('API RAW RESPONSE:', text);
 
         if (!res.ok) {
           throw new Error(
-            `Sunucudan geçerli cevap gelmedi: ${res.status} - ${text}`
+            `Sunucudan geçerli cevap gelmedi: ${res.status} - ${text}`,
           );
         }
 
-        const json: TrafficPlanResponse = JSON.parse(text); 
+        const json: TrafficPlanResponse = JSON.parse(text);
 
         if (!cancelled) {
           setData(json);
         }
       } catch (err) {
-        console.error("useTrafficInfo error:", err);
+        console.error('useTrafficInfo error:', err);
         if (!cancelled) {
           setError(err as Error);
         }
@@ -104,4 +105,3 @@ const useTrafficInfo = () => {
 };
 
 export default useTrafficInfo;
-

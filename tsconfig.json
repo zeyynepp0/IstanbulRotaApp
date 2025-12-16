@@ -3,15 +3,9 @@
   "compilerOptions": {
     "jsx": "react-native",
     "strict": true,
-    "types": ["nativewind/types"]
+    "types": ["nativewind/types"],
+    "skipLibCheck": true
   },
-  "include": [
-    "src",
-    "App.tsx",
-    "nativewind-env.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "Pods"
-  ]
+  "include": ["src", "App.tsx", "nativewind-env.d.ts"],
+  "exclude": ["node_modules", "Pods"]
 }
