@@ -38,7 +38,6 @@ export default function RouteCard({
     }
   };
 
-  // Renk sınıflarını dinamik belirle
   const getIconBgClass = () => {
     switch (type) {
       case 'car':

@@ -1,4 +1,3 @@
-// src/types/api.ts
 export interface Location {
   lat: number;
   lon: number;

@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { GeocodeResult } from '../types/api';
 
-//const API_BASE = 'http://10.81.1.76:8000'; // Sonunda slash yok!
-const API_BASE = 'http://192.168.101.100:8000'; // Sonunda slash yok!
+//const API_BASE = 'http://10.81.1.76:8000';
+const API_BASE = 'http://172.21.73.46:8000';
 
 export const useGeocoding = () => {
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,8 @@ export const useGeocoding = () => {
     setError(null);
 
     try {
-      // ÖNEMLİ: Doğru URL formatı
       const url = `${API_BASE}/geocode?q=${encodeURIComponent(query)}`;
-      console.log('Geocoding URL:', url); // Debug için
+      console.log('Geocoding URL:', url); // Debug
 
       const response = await fetch(url, {
         method: 'GET',
@@ -32,7 +31,7 @@ export const useGeocoding = () => {
         },
       });
 
-      console.log('Response status:', response.status); // Debug için
+      console.log('Response status:', response.status); // Debug
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -40,7 +39,7 @@ export const useGeocoding = () => {
       }
 
       const data = await response.json();
-      console.log('Geocoding sonuç:', data); // Debug için
+      console.log('Geocoding sonuç:', data); // Debug
 
       if (data.error) {
         console.warn('Geocoding uyarısı:', data.error);

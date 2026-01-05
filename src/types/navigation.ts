@@ -1,9 +1,7 @@
-// src/types/navigation.ts
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import { Location } from './api';
 
-// Stack parametrelerini tanımla
 export type RootStackParamList = {
   Search: undefined;
   Results: {
@@ -16,30 +14,24 @@ export type RootStackParamList = {
   };
 };
 
-// SearchScreen tipleri
+// SearchScreen
 export type SearchScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Search'
 >;
 
-// ResultsScreen tipleri
+// ResultsScreen
 export type ResultsScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Results'
 >;
 
-export type ResultsScreenRouteProp = RouteProp<
-  RootStackParamList,
-  'Results'
->;
+export type ResultsScreenRouteProp = RouteProp<RootStackParamList, 'Results'>;
 
-// DetailScreen tipleri
+// DetailScreen
 export type DetailScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Detail'
 >;
 
-export type DetailScreenRouteProp = RouteProp<
-  RootStackParamList,
-  'Detail'
->;
+export type DetailScreenRouteProp = RouteProp<RootStackParamList, 'Detail'>;

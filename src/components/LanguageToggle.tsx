@@ -14,10 +14,9 @@ export default function LanguageToggle({ dark = false }: LanguageToggleProps) {
     i18n.changeLanguage(nextLang);
   };
 
-  // Tasarım: Mavi header üzerindeyse beyaz/saydam, beyaz zemin üzerindeyse gri/mavi
   const containerStyle = dark
-    ? 'bg-gray-100 border border-gray-300' // Beyaz zemin için
-    : 'bg-white/20 border border-white/30'; // Mavi header için
+    ? 'bg-gray-100 border border-gray-300'
+    : 'bg-white/20 border border-white/30';
 
   const textStyle = dark ? 'text-gray-700' : 'text-white';
 
